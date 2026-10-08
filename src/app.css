@@ -4,19 +4,99 @@
 @import "tailwindcss/preflight.css";
 @import "tailwindcss/utilities.css";
 
+:root {
+  color-scheme: dark;
+
+  --od-bg: #111111;
+  --od-surface: #1a1a1a;
+  --od-surface-raised: #222222;
+  --od-surface-hover: #2b2b2b;
+  --od-border: rgba(255, 255, 255, 0.09);
+  --od-border-strong: rgba(255, 255, 255, 0.15);
+  --od-text: #f3f3f3;
+  --od-text-muted: #a9a9a9;
+  --od-accent: #60cdff;
+  --od-accent-hover: #83d8ff;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  background: var(--od-bg);
+  color: var(--od-text);
+
+  font-family:
+    "Segoe UI Variable",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 800px;
+  min-height: 600px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+::selection {
+  color: #001018;
+  background: var(--od-accent);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
 *,
 ::after,
 ::before,
 ::backdrop,
 ::file-selector-button {
-	border-color: var(--color-gray-200, currentColor);
+  border-color: var(--od-border);
 }
 
 button:focus:not(:focus-visible),
 select:focus:not(:focus-visible),
 input:focus,
 textarea:focus {
-	@apply outline-hidden;
+  outline: none;
 }
 
 button,
@@ -24,61 +104,134 @@ input[type="radio"],
 input[type="checkbox"],
 input[type="range"],
 input[type="color"] {
-	@apply cursor-pointer;
+  cursor: pointer;
 }
 
 .select-wrapper {
-	@apply relative;
+  position: relative;
 }
 
 .select-wrapper select {
-	@apply appearance-none;
-	@apply px-2 py-1;
-	@apply text-sm text-neutral-300;
-	@apply bg-neutral-700;
-	@apply border border-neutral-600 rounded-lg;
-	@apply cursor-pointer;
+  appearance: none;
+  cursor: pointer;
+
+  min-height: 34px;
+  padding: 6px 34px 6px 11px;
+
+  color: var(--od-text);
+  background: var(--od-surface-raised);
+  border: 1px solid var(--od-border);
+  border-radius: 7px;
+
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.select-wrapper select:hover {
+  background: var(--od-surface-hover);
+  border-color: var(--od-border-strong);
+}
+
+.select-wrapper select:focus-visible {
+  border-color: var(--od-accent);
+  box-shadow: 0 0 0 2px rgba(96, 205, 255, 0.22);
 }
 
 .select-wrapper::after {
-	@apply absolute right-4 top-[47.5%] -translate-y-1/2;
-	@apply w-2 h-2 rotate-45;
-	@apply border-r-2 border-b-2;
-	@apply pointer-events-none content-["_"];
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--od-text);
+  border-bottom: 2px solid var(--od-text);
+  pointer-events: none;
+  content: "";
 }
 
 .select-device-wrapper {
-	@apply relative;
+  position: relative;
 }
 
 .select-device-wrapper select {
-	@apply appearance-none;
-	@apply font-semibold text-xl text-neutral-200;
-	@apply cursor-pointer;
+  appearance: none;
+  cursor: pointer;
+
+  color: var(--od-text);
+  font-weight: 600;
+  font-size: 20px;
+
+  min-height: 40px;
+  padding: 8px 34px 8px 14px;
+
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.select-device-wrapper select:hover {
+  background: var(--od-surface);
+  border-color: var(--od-border);
 }
 
 .select-device-wrapper::after {
-	@apply absolute right-0.5 top-[47.5%] -translate-y-1/2;
-	@apply w-2 h-2 rotate-45;
-	@apply border-r-2 border-b-2 border-neutral-100;
-	@apply pointer-events-none content-["_"];
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--od-text);
+  border-bottom: 2px solid var(--od-text);
+  pointer-events: none;
+  content: "";
 }
 
 .select-profile-wrapper {
-	@apply relative;
+  position: relative;
 }
 
 .select-profile-wrapper select {
-	@apply appearance-none;
-	@apply text-neutral-400;
-	@apply cursor-pointer;
+  appearance: none;
+  cursor: pointer;
+
+  color: var(--od-text-muted);
+
+  min-height: 32px;
+  padding: 4px 28px 4px 10px;
+
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.select-profile-wrapper select:hover {
+  background: var(--od-surface);
+  border-color: var(--od-border);
 }
 
 .select-profile-wrapper::after {
-	@apply absolute right-0.5 top-[47.5%] -translate-y-1/2;
-	@apply w-1.5 h-1.5 rotate-45;
-	@apply border-r-2 border-b-2 border-neutral-400;
-	@apply pointer-events-none content-["_"];
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--od-text-muted);
+  border-bottom: 2px solid var(--od-text-muted);
+  pointer-events: none;
+  content: "";
 }
 
 .plugin-readme h1,
@@ -87,81 +240,107 @@ input[type="color"] {
 .plugin-readme h4,
 .plugin-readme h5,
 .plugin-readme h6 {
-	@apply font-medium text-neutral-200;
+  color: var(--od-text);
+  font-weight: 500;
 }
+
 .plugin-readme h1:not(:first-child),
 .plugin-readme h2:not(:first-child),
 .plugin-readme h3:not(:first-child) {
-	@apply mt-5;
+  margin-top: 20px;
 }
+
 .plugin-readme h1,
 .plugin-readme h2,
 .plugin-readme h3 {
-	@apply mb-3 pb-1.5 border-b border-neutral-600;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--od-border);
 }
+
 .plugin-readme h1 {
-	@apply text-2xl;
+  font-size: 24px;
 }
+
 .plugin-readme h2 {
-	@apply text-xl;
+  font-size: 20px;
 }
+
 .plugin-readme h3 {
-	@apply text-lg;
+  font-size: 16px;
 }
+
 .plugin-readme a {
-	@apply text-blue-400 hover:underline cursor-pointer;
+  color: #60a5fa;
+  text-decoration: underline;
+  cursor: pointer;
 }
+
 .plugin-readme ul {
-	@apply list-disc ml-6;
+  list-style: disc;
+  margin-left: 24px;
 }
+
 .plugin-readme img {
-	@apply my-3;
+  margin: 12px 0;
 }
 
 .plugin-readme .octicon {
-	display: inline-block;
-	fill: currentColor;
-	vertical-align: text-bottom;
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
 }
+
 .plugin-readme .markdown-alert {
-	padding: 0 1em;
-	margin-top: 16px;
-	margin-bottom: 16px;
-	color: inherit;
-	border-left: 0.25em solid #444c56;
+  padding: 0 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: 4px solid #444c56;
 }
+
 .plugin-readme .markdown-alert-title {
-	display: inline-flex;
-	align-items: center;
-	font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
 }
+
 .plugin-readme .markdown-alert-note {
-	border-left-color: #539bf5;
+  border-left-color: #539bf5;
 }
+
 .plugin-readme .markdown-alert-tip {
-	border-left-color: #57ab5a;
+  border-left-color: #57ab5a;
 }
+
 .plugin-readme .markdown-alert-important {
-	border-left-color: #986ee2;
+  border-left-color: #986ee2;
 }
+
 .plugin-readme .markdown-alert-warning {
-	border-left-color: #c69026;
+  border-left-color: #c69026;
 }
+
 .plugin-readme .markdown-alert-caution {
-	border-left-color: #e5534b;
+  border-left-color: #e5534b;
 }
+
 .plugin-readme .markdown-alert-note > .markdown-alert-title {
-	color: #539bf5;
+  color: #539bf5;
 }
+
 .plugin-readme .markdown-alert-tip > .markdown-alert-title {
-	color: #57ab5a;
+  color: #57ab5a;
 }
+
 .plugin-readme .markdown-alert-important > .markdown-alert-title {
-	color: #986ee2;
+  color: #986ee2;
 }
+
 .plugin-readme .markdown-alert-warning > .markdown-alert-title {
-	color: #c69026;
+  color: #c69026;
 }
+
 .plugin-readme .markdown-alert-caution > .markdown-alert-title {
-	color: #e5534b;
+  color: #e5534b;
 }
